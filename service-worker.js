@@ -2,13 +2,13 @@
 
 const CACHE_NAME = 'seetup-diary-v1';
 const STATIC_ASSETS = [
-    '/',
-    '/index.html',
-    '/style.css',
-    '/app.js',
-    '/manifest.json',
-    '/icons/icon-192x192.png',
-    '/icons/icon-512x512.png'
+    './',
+    './index.html',
+    './style.css',
+    './app.js',
+    './manifest.json',
+    './icons/icon-192x192.png',
+    './icons/icon-512x512.png'
 ];
 
 // Install event - cache all static assets
@@ -101,7 +101,7 @@ self.addEventListener('fetch', (event) => {
                         
                         // Return offline page for navigation requests
                         if (event.request.mode === 'navigate') {
-                            return caches.match('/index.html');
+                            return caches.match('./index.html');
                         }
                         
                         return null;
@@ -133,8 +133,8 @@ self.addEventListener('push', (event) => {
     
     const options = {
         body: event.data ? event.data.text() : 'New notification from Seet Up Diary',
-        icon: '/icons/icon-192x192.png',
-        badge: '/icons/icon-192x192.png',
+        icon: './icons/icon-192x192.png',
+        badge: './icons/icon-192x192.png',
         vibrate: [100, 50, 100],
         data: {
             dateOfArrival: Date.now(),
@@ -159,7 +159,7 @@ self.addEventListener('notificationclick', (event) => {
     
     if (event.action === 'open' || !event.action) {
         event.waitUntil(
-            clients.openWindow('/')
+            clients.openWindow('./')
         );
     }
 });
