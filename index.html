@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#10a37f">
+    <meta name="description" content="Seet Up Diary - Write your thoughts anytime, anywhere">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Seet Up Diary">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <title>Seet Up Diary</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar - Saved Entries -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <button class="new-entry-btn" id="new-entry-btn">
+                    <span class="plus-icon">+</span>
+                    New Entry
+                </button>
+            </div>
+            <div class="sidebar-content">
+                <h2 class="sidebar-title">Previous Entries</h2>
+                <div id="entries-list" class="entries-list">
+                    <!-- Entries will be dynamically inserted here -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content - Writing Area -->
+        <main class="main-panel">
+            <header class="main-header">
+                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+                    <span class="menu-icon">☰</span>
+                </button>
+                <div class="header-content">
+                    <h1 class="app-title">Seet Up Diary</h1>
+                    <p class="app-subtitle">Write your thoughts anytime</p>
+                </div>
+            </header>
+
+            <div class="writing-area">
+                <div class="input-container">
+                    <textarea 
+                        id="diary-input" 
+                        class="diary-textarea" 
+                        placeholder="Write your thoughts here..."
+                        aria-label="Diary entry input"
+                    ></textarea>
+                    <div class="input-footer">
+                        <span class="char-count" id="char-count">0 characters</span>
+                        <button id="save-btn" class="save-button">
+                            <span class="save-icon">💾</span>
+                            Save Entry
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
