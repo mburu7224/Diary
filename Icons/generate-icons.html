@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Seet Up Diary Icons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .icon-box {
+            text-align: center;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .instructions {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        code {
+            background-color: #e8e8e8;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 Seet Up Diary Icon Generator</h1>
+    <p>Click the buttons below to download the app icons</p>
+    
+    <div class="icon-container">
+        <div class="icon-box">
+            <canvas id="icon192" width="192" height="192"></canvas>
+            <p>192x192</p>
+            <button onclick="downloadIcon(192)">Download 192x192</button>
+        </div>
+        <div class="icon-box">
+            <canvas id="icon512" width="512" height="512"></canvas>
+            <p>512x512</p>
+            <button onclick="downloadIcon(512)">Download 512x512</button>
+        </div>
+    </div>
+    
+    <div class="instructions">
+        <h3>📋 Instructions:</h3>
+        <ol>
+            <li>Click "Download 192x192" to save <code>icon-192x192.png</code></li>
+            <li>Click "Download 512x512" to save <code>icon-512x512.png</code></li>
+            <li>Move both files to the <code>icons/</code> folder</li>
+            <li>Refresh your PWA app</li>
+        </ol>
+    </div>
+
+    <script>
+        // Draw the icon on both canvases
+        function drawIcon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+            const scale = size / 192;
+            
+            // Background
+            ctx.fillStyle = '#4CAF50';
+            ctx.fillRect(0, 0, size, size);
+            
+            // Rounded corners effect (simulated with white overlay)
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(size * 0.5, size * 0.5, size * 0.35, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Diary/book icon
+            ctx.fillStyle = '#4CAF50';
+            ctx.beginPath();
+            ctx.moveTo(size * 0.3, size * 0.35);
+            ctx.lineTo(size * 0.7, size * 0.35);
+            ctx.lineTo(size * 0.7, size * 0.65);
+            ctx.lineTo(size * 0.3, size * 0.65);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Book spine
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 3 * scale;
+            ctx.beginPath();
+            ctx.moveTo(size * 0.5, size * 0.35);
+            ctx.lineTo(size * 0.5, size * 0.65);
+            ctx.stroke();
+            
+            // Lines on left page
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2 * scale;
+            for (let i = 0; i < 3; i++) {
+                ctx.beginPath();
+                ctx.moveTo(size * 0.35, size * (0.42 + i * 0.07));
+                ctx.lineTo(size * 0.47, size * (0.42 + i * 0.07));
+                ctx.stroke();
+            }
+            
+            // Lines on right page
+            for (let i = 0; i < 3; i++) {
+                ctx.beginPath();
+                ctx.moveTo(size * 0.53, size * (0.42 + i * 0.07));
+                ctx.lineTo(size * 0.65, size * (0.42 + i * 0.07));
+                ctx.stroke();
+            }
+            
+            // Pen/pencil
+            ctx.fillStyle = '#FFD700';
+            ctx.beginPath();
+            ctx.moveTo(size * 0.72, size * 0.28);
+            ctx.lineTo(size * 0.78, size * 0.22);
+            ctx.lineTo(size * 0.82, size * 0.26);
+            ctx.lineTo(size * 0.76, size * 0.32);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Pencil tip
+            ctx.fillStyle = '#333333';
+            ctx.beginPath();
+            ctx.moveTo(size * 0.72, size * 0.28);
+            ctx.lineTo(size * 0.74, size * 0.30);
+            ctx.lineTo(size * 0.76, size * 0.32);
+            ctx.closePath();
+            ctx.fill();
+        }
+        
+        // Initialize canvases
+        drawIcon(document.getElementById('icon192'), 192);
+        drawIcon(document.getElementById('icon512'), 512);
+        
+        // Download function
+        function downloadIcon(size) {
+            const canvas = document.getElementById(`icon${size}`);
+            const link = document.createElement('a');
+            link.download = `icon-${size}x${size}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    </script>
+</body>
+</html>
